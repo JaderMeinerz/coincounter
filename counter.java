@@ -17,10 +17,7 @@ public class counter {
         return(contador);
     }
 
-    public static void mensagem(Float real){
-        Integer centavos = Math.round(real*100);
-        
-
+    public static List<Cedulas> notas(){
         List<Cedulas> cedulas = new ArrayList<Cedulas>();
         cedulas.add(new Cedulas("Nota de 100", 10000));
         cedulas.add(new Cedulas("Nota de 50", 5000));
@@ -34,12 +31,42 @@ public class counter {
         cedulas.add(new Cedulas("Moeda de 10", 10));
         cedulas.add(new Cedulas("Moeda de 5", 5));
 
-        
+        return cedulas;
+    }
+   
+    public static void mensagem(Float real){
+        Integer centavos = Math.round(real*100);
+        List<Cedulas> cedulas = notas();
+           
+
         for (int i = 0 ; i < cedulas.size(); i++){
             Cedulas cedula = cedulas.get(i);
             int valor = cedula.getValor();
             String nome = cedula.getCedula();
-            System.out.println(contador(centavos, valor) + " " + nome + " e sobram " + resto (centavos, valor) + " centavos");
+
+            if (contador(centavos, valor)>0){
+                System.out.println(contador(centavos, valor) + " " + nome + " e sobram " + resto (centavos, valor) + " centavos");
+            }
+
+        }
+            
+    }
+
+    public static void troco(Float real){
+        Integer centavos = Math.round(real*100);
+        List<Cedulas> cedulas = notas();
+           
+
+        for (int i = 0 ; i < cedulas.size(); i++){
+            Cedulas cedula = cedulas.get(i);
+            int valor = cedula.getValor();
+            String nome = cedula.getCedula();
+
+            if (contador(centavos, valor)>0){
+                System.out.println(contador(centavos, valor) + " " + nome );
+                centavos = resto(centavos, valor);
+            }
+
         }
             
     }
@@ -52,10 +79,17 @@ public class counter {
         System.out.println("Digite o valor do troco em reais: ");
         real = s.nextFloat();
         
+        System.out.println();
+
         System.out.println("R$ "+ real+ " Reais é equivalente a:");
 
         mensagem(real);
-                
+        
+        System.out.println();
+
+        System.out.println("O melhor troco para R$ "+ real +" é de: ");
+        
+        troco(real);
     }
     
 }
