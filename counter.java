@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -15,42 +17,45 @@ public class counter {
         return(contador);
     }
 
+    public static void mensagem(Float real){
+        Integer centavos = Math.round(real*100);
+        
+
+        List<Cedulas> cedulas = new ArrayList<Cedulas>();
+        cedulas.add(new Cedulas("Nota de 100", 10000));
+        cedulas.add(new Cedulas("Nota de 50", 5000));
+        cedulas.add(new Cedulas("Nota de 20", 2000));
+        cedulas.add(new Cedulas("Nota de 10", 1000));
+        cedulas.add(new Cedulas("Nota de 5", 500));
+        cedulas.add(new Cedulas("Nota de 2", 200));
+        cedulas.add(new Cedulas("Moeda de 1", 100));
+        cedulas.add(new Cedulas("Moeda de 50", 50));
+        cedulas.add(new Cedulas("Moeda de 25", 25));
+        cedulas.add(new Cedulas("Moeda de 10", 10));
+        cedulas.add(new Cedulas("Moeda de 5", 5));
+
+        
+        for (int i = 0 ; i < cedulas.size(); i++){
+            Cedulas cedula = cedulas.get(i);
+            int valor = cedula.getValor();
+            String nome = cedula.getCedula();
+            System.out.println(contador(centavos, valor) + " " + nome + " e sobram " + resto (centavos, valor) + " centavos");
+        }
+            
+    }
 
     
     public static void main(String[] args) {
         Float real;
-        Integer centavos;
         Scanner s = new Scanner(System.in);
 
         System.out.println("Digite o valor do troco em reais: ");
         real = s.nextFloat();
-        centavos = Math.round(real*100);
-        
-        Integer notaCem = 10000, 
-        notaCinquenta = 5000, 
-        notaVinte = 2000,
-        notaDez = 1000,
-        notaCinco = 500,
-        notaDois = 200,
-        moedaUm = 100,
-        moedaCinquenta = 50,
-        moedaVinteCinco = 25,
-        moedaDez = 10,
-        moedaCinco = 5;
         
         System.out.println("R$ "+ real+ " Reais é equivalente a:");
-        System.out.println(contador(centavos, notaCem) + " Notas de 100 Reais e sobram "+ resto(centavos, notaCem)+ " centavos");
-        System.out.println(contador(centavos, notaCinquenta)+ " Notas de 50 Reais e sobram "+ resto(centavos, notaCinquenta)+ " centavos");
-        System.out.println(contador(centavos, notaVinte) + " Notas de 20 Reais e sobram "+ resto(centavos, notaVinte) + " centavos");
-        System.out.println(contador(centavos, notaDez)+ " Notas de 10 Reais e sobram "+ resto(centavos, notaDez)+ " centavos");
-        System.out.println(contador(centavos, notaCinco) + " Notas de 5 Reais e sobram "+ resto(centavos, notaCinco)+ " centavos");
-        System.out.println(contador(centavos, notaDois) + " Notas de 2 Reais e sobram "+ resto(centavos, notaDois)+ " centavos");
-        System.out.println(contador(centavos, moedaUm) + " Moedas de 1 Real e sobram "+ resto(centavos, moedaUm)+ " centavos");
-        System.out.println(contador(centavos, moedaCinquenta) + " Moedas de 50 Centavos e sobram "+ resto(centavos, moedaCinquenta)+ " centavos");
-        System.out.println(contador(centavos, moedaVinteCinco) + " Moedas de 25 Centavos e sobram "+ resto(centavos, moedaVinteCinco)+ " centavos");
-        System.out.println(contador(centavos, moedaDez) + " Moedas de 10 Centavos e sobram "+ resto(centavos, moedaDez)+ " centavos");
-        System.out.println(contador(centavos, moedaCinco) + " Moedas de 5 Centavos e sobram "+ resto(centavos, moedaCinco)+ " centavos");
-        
+
+        mensagem(real);
+                
     }
     
 }
